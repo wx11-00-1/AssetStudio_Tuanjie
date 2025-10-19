@@ -18,6 +18,10 @@ using System.Timers;
 using System.Windows.Forms;
 using static AssetStudioGUI.Studio;
 using Font = AssetStudio.Font;
+using static System.Net.WebRequestMethods;
+using static System.Windows.Forms.DataFormats;
+
+
 #if NET472
 using Vector3 = OpenTK.Vector3;
 using Vector4 = OpenTK.Vector4;
@@ -89,7 +93,7 @@ namespace AssetStudioGUI
         private string saveDirectoryBackup = string.Empty;
 
         private GUILogger logger;
-        private string maintainerTag = "(maintained by 恶霸威)";
+        private string maintainerTag = "💫✨💞";
 
         [DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [In] ref uint pcFonts);
@@ -103,7 +107,7 @@ namespace AssetStudioGUI
             }
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             InitializeComponent();
-            Text = $"AssetStudioGUI v{Application.ProductVersion} - {maintainerTag}";
+            Text = $"AssetStudioGUI - {maintainerTag}";
             delayTimer = new System.Timers.Timer(800);
             delayTimer.Elapsed += new ElapsedEventHandler(delayTimer_Elapsed);
             displayAll.Checked = Properties.Settings.Default.displayAll;
@@ -239,11 +243,11 @@ namespace AssetStudioGUI
 
             if (!string.IsNullOrEmpty(productName))
             {
-                Text = $"AssetStudioGUI v{Application.ProductVersion} - {productName} - {assetsManager.assetsFileList[0].unityVersion} - {assetsManager.assetsFileList[0].m_TargetPlatform} - {maintainerTag}";
+                Text = $"AssetStudioGUI - {productName} - {assetsManager.assetsFileList[0].unityVersion} - {assetsManager.assetsFileList[0].m_TargetPlatform} - {maintainerTag}";
             }
             else
             {
-                Text = $"AssetStudioGUI v{Application.ProductVersion} - no productName - {assetsManager.assetsFileList[0].unityVersion} - {assetsManager.assetsFileList[0].m_TargetPlatform} - {maintainerTag}";
+                Text = $"AssetStudioGUI - no productName - {assetsManager.assetsFileList[0].unityVersion} - {assetsManager.assetsFileList[0].m_TargetPlatform} - {maintainerTag}";
             }
 
             assetListView.VirtualListSize = visibleAssets.Count;
@@ -390,7 +394,7 @@ namespace AssetStudioGUI
                         Directory.CreateDirectory(versionPath);
 
                         var saveFile = $"{versionPath}{Path.DirectorySeparatorChar}{item.SubItems[1].Text} {item.Text}.txt";
-                        File.WriteAllText(saveFile, item.ToString());
+                        System.IO.File.WriteAllText(saveFile, item.ToString());
 
                         Progress.Report(++i, count);
                     }
@@ -2084,26 +2088,46 @@ namespace AssetStudioGUI
             logger.ShowErrorMessage = toolStripMenuItem15.Checked;
         }
 
-        private void aboutAssetStudioToolStripMenuItem_Click(object sender, EventArgs e)
+        private void configToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("AssetStudio_Tuanjie is a tool for exploring, extracting and exporting assets and assetbundles.\n" +
-                "For more information, visit https://github.com/SiMaLaoShi/AssetStudio_Tuanjie.",
-                "About AssetStudio_Tuanjie",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            var f = new FormSeerConfig();
+            f.Show();
         }
 
-        private void donateAssetStudioToolStripMenuItem_Click(object sender, EventArgs e)
+        private IEnumerable<string> GetFolderFileNames(string folder)
         {
-            DonateForm donateForm = new DonateForm();
+            return Directory.EnumerateFiles(folder)
+                .Select(name => Path.GetFileName(name));
+        }
 
-            donateForm.StartPosition = FormStartPosition.Manual;
-            Point center = this.Location;
-            center.X += (this.Width - donateForm.Width) / 2;
-            center.Y += (this.Height - donateForm.Height) / 2;
-            donateForm.Location = center;
+        private void exHeadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 根据第二列的资源路径，筛选出下载文件夹中没有的精灵头像
+            // assets/art/ui/assets/pet/head/
+            string filter = Properties.Settings.Default.seerFilterHead;
+            string fullPath = Path.Combine(Properties.Settings.Default.seerFolderHead, "Texture2D");
+            var exists = Directory.Exists(fullPath) ? GetFolderFileNames(fullPath).Select(n => n.Split('.')[0]).ToHashSet() : new HashSet<string>();
+            Studio.ExportAssets(Properties.Settings.Default.seerFolderHead,
+                exportableAssets.FindAll(x => 
+                    !exists.Contains(x.Text) &&
+                    x.SubItems[1].Text.StartsWith(filter, StringComparison.OrdinalIgnoreCase) &&
+                    x.Asset.type == ClassIDType.Texture2D
+                    ),
+                ExportType.Convert);
+        }
 
-            donateForm.ShowDialog();
+        private void exBodyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filter = Properties.Settings.Default.seerFilterBody;
+            string fullPath = Path.Combine(Properties.Settings.Default.seerFolderBody, "Texture2D");
+            var exists = Directory.Exists(fullPath) ? GetFolderFileNames(fullPath).Select(n => n.Split('.')[0]).ToHashSet() : new HashSet<string>();
+            Studio.ExportAssets(Properties.Settings.Default.seerFolderBody,
+                exportableAssets.FindAll(x =>
+                    !exists.Contains(x.Text) &&
+                    x.SubItems[1].Text.StartsWith(filter, StringComparison.OrdinalIgnoreCase) &&
+                    x.Asset.type == ClassIDType.Texture2D
+                    ),
+                ExportType.Convert);
         }
 
         private void glControl1_MouseWheel(object sender, MouseEventArgs e)

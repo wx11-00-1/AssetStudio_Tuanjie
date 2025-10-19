@@ -289,5 +289,65 @@ namespace AssetStudioGUI.Properties {
                 this["decompileLua"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("assets/art/ui/assets/pet/head/")]
+        public string seerFilterHead
+        {
+            get
+            {
+                return ((string)(this["seerFilterHead"]));
+            }
+            set
+            {
+                this["seerFilterHead"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string seerFolderHead
+        {
+            get
+            {
+                return ((string)(this["seerFolderHead"]));
+            }
+            set
+            {
+                this["seerFolderHead"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("assets/art/ui/assets/pet/body/")]
+        public string seerFilterBody
+        {
+            get
+            {
+                return ((string)(this["seerFilterBody"]));
+            }
+            set
+            {
+                this["seerFilterBody"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string seerFolderBody
+        {
+            get
+            {
+                return ((string)(this["seerFolderBody"]));
+            }
+            set
+            {
+                this["seerFolderBody"] = value;
+            }
+        }
     }
 }

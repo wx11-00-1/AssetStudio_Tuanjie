@@ -68,5 +68,17 @@
     <Setting Name="decompileLua" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="seerFilterHead" Type="System.String" Scope="User">
+      <Value Profile="(Default)">assets/art/ui/assets/pet/head/</Value>
+    </Setting>
+    <Setting Name="seerFolderHead" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="seerFilterBody" Type="System.String" Scope="User">
+      <Value Profile="(Default)">assets/art/ui/assets/pet/body/</Value>
+    </Setting>
+    <Setting Name="seerFolderBody" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -77,8 +77,10 @@
             this.debugMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportClassStructuresMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutAssetStudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.seerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exBodyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -159,7 +161,7 @@
             this.exportToolStripMenuItem,
             this.filterTypeToolStripMenuItem,
             this.debugMenuItem,
-            this.aboutToolStripMenuItem});
+            this.seerToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1264, 25);
@@ -523,9 +525,7 @@
             // 
             // toolStripMenuItem15
             // 
-            this.toolStripMenuItem15.Checked = true;
             this.toolStripMenuItem15.CheckOnClick = true;
-            this.toolStripMenuItem15.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripMenuItem15.Name = "toolStripMenuItem15";
             this.toolStripMenuItem15.Size = new System.Drawing.Size(207, 22);
             this.toolStripMenuItem15.Text = "Show error message";
@@ -538,20 +538,36 @@
             this.exportClassStructuresMenuItem.Text = "Export class structures";
             this.exportClassStructuresMenuItem.Click += new System.EventHandler(this.exportClassStructuresMenuItem_Click);
             // 
-            // aboutToolStripMenuItem
+            // seerToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutAssetStudioToolStripMenuItem});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(55, 21);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.seerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configToolStripMenuItem,
+            this.exHeadToolStripMenuItem,
+            this.exBodyToolStripMenuItem});
+            this.seerToolStripMenuItem.Name = "seerToolStripMenuItem";
+            this.seerToolStripMenuItem.Size = new System.Drawing.Size(46, 21);
+            this.seerToolStripMenuItem.Text = "Seer";
             // 
-            // aboutAssetStudioToolStripMenuItem
+            // configToolStripMenuItem
             // 
-            this.aboutAssetStudioToolStripMenuItem.Name = "aboutAssetStudioToolStripMenuItem";
-            this.aboutAssetStudioToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.aboutAssetStudioToolStripMenuItem.Text = "About AssetStudio_Tuanjie";
-            this.aboutAssetStudioToolStripMenuItem.Click += new System.EventHandler(this.aboutAssetStudioToolStripMenuItem_Click);
+            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configToolStripMenuItem.Text = "Config";
+            this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
+            // 
+            // exHeadToolStripMenuItem
+            // 
+            this.exHeadToolStripMenuItem.Name = "exHeadToolStripMenuItem";
+            this.exHeadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exHeadToolStripMenuItem.Text = "ExHead";
+            this.exHeadToolStripMenuItem.Click += new System.EventHandler(this.exHeadToolStripMenuItem_Click);
+            // 
+            // exBodyToolStripMenuItem
+            // 
+            this.exBodyToolStripMenuItem.Name = "exBodyToolStripMenuItem";
+            this.exBodyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exBodyToolStripMenuItem.Text = "ExBody";
+            this.exBodyToolStripMenuItem.Click += new System.EventHandler(this.exBodyToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -1238,9 +1254,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem14;
         private System.Windows.Forms.ToolStripTextBox specifyUnityVersion;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutAssetStudioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem decompileLua;
+        private System.Windows.Forms.ToolStripMenuItem seerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exHeadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exBodyToolStripMenuItem;
     }
 }
 
