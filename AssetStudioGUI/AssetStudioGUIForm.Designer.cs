@@ -131,6 +131,7 @@
             this.exportAnimatorwithselectedAnimationClipMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToSceneHierarchyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showOriginalFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -543,7 +544,8 @@
             this.seerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configToolStripMenuItem,
             this.exHeadToolStripMenuItem,
-            this.exBodyToolStripMenuItem});
+            this.exBodyToolStripMenuItem,
+            this.exConfigToolStripMenuItem});
             this.seerToolStripMenuItem.Name = "seerToolStripMenuItem";
             this.seerToolStripMenuItem.Size = new System.Drawing.Size(46, 21);
             this.seerToolStripMenuItem.Text = "Seer";
@@ -1108,6 +1110,13 @@
             this.showOriginalFileToolStripMenuItem.Visible = false;
             this.showOriginalFileToolStripMenuItem.Click += new System.EventHandler(this.showOriginalFileToolStripMenuItem_Click);
             // 
+            // exConfigToolStripMenuItem
+            // 
+            this.exConfigToolStripMenuItem.Name = "exConfigToolStripMenuItem";
+            this.exConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exConfigToolStripMenuItem.Text = "ExConfig";
+            this.exConfigToolStripMenuItem.Click += new System.EventHandler(this.exConfigToolStripMenuItem_Click);
+            // 
             // AssetStudioGUIForm
             // 
             this.AllowDrop = true;
@@ -1259,6 +1268,7 @@
         private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exHeadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exBodyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exConfigToolStripMenuItem;
     }
 }
 

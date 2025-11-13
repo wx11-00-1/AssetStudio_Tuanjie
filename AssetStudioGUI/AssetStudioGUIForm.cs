@@ -2130,6 +2130,17 @@ namespace AssetStudioGUI
                 ExportType.Convert);
         }
 
+        private void exConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filter = Properties.Settings.Default.seerFilterConfig;
+            Studio.ExportAssets(Properties.Settings.Default.seerFolderConfig,
+                exportableAssets.FindAll(x =>
+                    x.SubItems[1].Text.StartsWith(filter, StringComparison.OrdinalIgnoreCase) &&
+                    x.Asset.type == ClassIDType.TextAsset
+                    ),
+                ExportType.Convert);
+        }
+
         private void glControl1_MouseWheel(object sender, MouseEventArgs e)
         {
             if (glControl1.Visible)

@@ -349,5 +349,35 @@ namespace AssetStudioGUI.Properties {
                 this["seerFolderBody"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("assets/game/configs/bytes/")]
+        public string seerFilterConfig
+        {
+            get
+            {
+                return ((string)(this["seerFilterConfig"]));
+            }
+            set
+            {
+                this["seerFilterConfig"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string seerFolderConfig
+        {
+            get
+            {
+                return ((string)(this["seerFolderConfig"]));
+            }
+            set
+            {
+                this["seerFolderConfig"] = value;
+            }
+        }
     }
 }

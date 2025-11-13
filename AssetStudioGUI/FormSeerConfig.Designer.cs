@@ -39,6 +39,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.filterBody = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.folderConfig = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.filterConfig = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // filterHead
@@ -129,7 +134,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(275, 247);
+            this.buttonOk.Location = new System.Drawing.Point(275, 364);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 11;
@@ -137,11 +142,59 @@
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(114, 308);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Folder";
+            // 
+            // folderConfig
+            // 
+            this.folderConfig.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.folderConfig.Location = new System.Drawing.Point(176, 305);
+            this.folderConfig.Name = "folderConfig";
+            this.folderConfig.Size = new System.Drawing.Size(174, 21);
+            this.folderConfig.TabIndex = 15;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(114, 271);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 12);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Filter";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(37, 293);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(41, 12);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Config";
+            // 
+            // filterConfig
+            // 
+            this.filterConfig.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.filterConfig.Location = new System.Drawing.Point(176, 268);
+            this.filterConfig.Name = "filterConfig";
+            this.filterConfig.Size = new System.Drawing.Size(174, 21);
+            this.filterConfig.TabIndex = 12;
+            // 
             // FormSeerConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 293);
+            this.ClientSize = new System.Drawing.Size(427, 429);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.folderConfig);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.filterConfig);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.folderBody);
@@ -175,5 +228,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox filterBody;
         private System.Windows.Forms.Button buttonOk;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox folderConfig;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox filterConfig;
     }
 }
