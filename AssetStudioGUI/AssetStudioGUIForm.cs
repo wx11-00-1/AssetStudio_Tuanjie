@@ -2132,6 +2132,16 @@ namespace AssetStudioGUI
 
         private void exConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // 清空文件夹
+            var path = Path.Combine(Properties.Settings.Default.seerFolderConfig, "TextAsset");
+            if (Directory.Exists(path))
+            {
+                var files = Directory.GetFiles(path);
+                foreach ( var file in files )
+                {
+                    System.IO.File.Delete(file);
+                }
+            }
             string filter = Properties.Settings.Default.seerFilterConfig;
             Studio.ExportAssets(Properties.Settings.Default.seerFolderConfig,
                 exportableAssets.FindAll(x =>
