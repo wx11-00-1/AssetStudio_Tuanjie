@@ -20,6 +20,14 @@ using static AssetStudioGUI.Studio;
 using Font = AssetStudio.Font;
 using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.DataFormats;
+using AssetStudioGUI.Seer.YooAsset;
+using System.Net.Http;
+using System.Net;
+using Newtonsoft.Json.Linq;
+
+
+
+
 
 
 #if NET472
@@ -2134,14 +2142,7 @@ namespace AssetStudioGUI
         {
             // 清空文件夹
             var path = Path.Combine(Properties.Settings.Default.seerFolderConfig, "TextAsset");
-            if (Directory.Exists(path))
-            {
-                var files = Directory.GetFiles(path);
-                foreach ( var file in files )
-                {
-                    System.IO.File.Delete(file);
-                }
-            }
+            DeleteFolder(path);
             string filter = Properties.Settings.Default.seerFilterConfig;
             Studio.ExportAssets(Properties.Settings.Default.seerFolderConfig,
                 exportableAssets.FindAll(x =>
@@ -2149,6 +2150,142 @@ namespace AssetStudioGUI
                     x.Asset.type == ClassIDType.TextAsset
                     ),
                 ExportType.Convert);
+        }
+
+        /// <summary>
+        /// 清空指定的文件夹，但不删除文件夹
+        /// </summary>
+        /// <param name="dir"></param>
+        private void DeleteFolder(string dir)
+        {
+            if (!Directory.Exists(dir))
+            {
+                return;
+            }
+            foreach (string d in Directory.GetFileSystemEntries(dir))
+            {
+                if (System.IO.File.Exists(d))
+                {
+                    try
+                    {
+                        FileInfo fi = new FileInfo(d);
+                        if (fi.Attributes.ToString().IndexOf("ReadOnly") != -1)
+                            fi.Attributes = FileAttributes.Normal;
+                        System.IO.File.Delete(d);//直接删除其中的文件 
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        DirectoryInfo d1 = new DirectoryInfo(d);
+                        if (d1.GetFiles().Length != 0)
+                        {
+                            DeleteFolder(d1.FullName);////递归删除子文件夹
+                        }
+                        Directory.Delete(d);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+        }
+
+        const string SEER_DOWNLOAD_FOLDER = "seer_download";
+        private string[] SEER_PACKAGE_NAMES = new string[]
+        {
+            "ConfigPackage",
+            "DefaultPackage",
+            "FollowPackage",
+            "PetAnimPackage",
+            "StartupPackage",
+        };
+
+        private async Task SeerUpdatePackage(string packageName, bool openFolderAfterFinished)
+        {
+            StatusStripUpdate($"{packageName} 开始更新");
+            string packageDownloadPath = Path.Combine(SEER_DOWNLOAD_FOLDER, packageName);
+            if (!Directory.Exists(packageDownloadPath))
+            {
+                Directory.CreateDirectory(packageDownloadPath);
+            }
+            DeleteFolder(packageDownloadPath);
+            PersistentTools.GetOrCreatePersistent(packageName);
+            const string BASE_URL = "https://newseer.61.com/Assets/StandaloneWindows64";
+            string packageVersion;
+            // 1. 获取版本号
+            using (var webClient = new WebClient())
+            {
+                // 抄 SeerApi 项目的请求头
+                webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36");
+                webClient.Headers.Add("referer", "https://newseer.61.com");
+                packageVersion = await webClient.DownloadStringTaskAsync($"{BASE_URL}/{packageName}/{YooAssetSettingsData.GetPackageVersionFileName(packageName)}");
+
+                // 2. 获取原始清单文件
+                var manifestBytes = await webClient.DownloadDataTaskAsync($"{BASE_URL}/{packageName}/{YooAssetSettingsData.GetManifestBinaryFileName(packageName, packageVersion)}");
+
+                // 3. 解析清单文件
+                var dmOpeation = new DeserializeManifestOperation(manifestBytes);
+                dmOpeation.Update(s =>
+                {
+                    StatusStripUpdate(s);
+                });
+                System.IO.File.WriteAllText(Path.Combine(SEER_DOWNLOAD_FOLDER, $"{packageName}Manifest.json"), JObject.FromObject(dmOpeation).ToString());
+
+                // 4.1 下载 Assets
+                foreach (var bundle in dmOpeation.Manifest.BundleList)
+                {
+                    FileUtility.WriteAllBytes(
+                        Path.Combine(packageDownloadPath, bundle.BundleName),
+                        await webClient.DownloadDataTaskAsync($"{BASE_URL}/{packageName}/{bundle.FileName}")
+                        );
+                }
+            }
+            StatusStripUpdate($"{packageName} 更新完成");
+            if (openFolderAfterFinished)
+            {
+                System.Diagnostics.Process.Start(packageDownloadPath);
+            }
+        }
+
+        private async void allToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            foreach (var packageName in SEER_PACKAGE_NAMES)
+            {
+                await SeerUpdatePackage(packageName, false);
+            }
+            System.Diagnostics.Process.Start(SEER_DOWNLOAD_FOLDER);
+        }
+
+        private async void configToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            await SeerUpdatePackage(SEER_PACKAGE_NAMES[0], true);
+        }
+
+        private async void defaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await SeerUpdatePackage(SEER_PACKAGE_NAMES[1], true);
+        }
+
+        private async void followToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await SeerUpdatePackage(SEER_PACKAGE_NAMES[2], true);
+        }
+
+        private async void petAnimToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await SeerUpdatePackage(SEER_PACKAGE_NAMES[3], true);
+        }
+
+        private async void startupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await SeerUpdatePackage(SEER_PACKAGE_NAMES[4], true);
         }
 
         private void glControl1_MouseWheel(object sender, MouseEventArgs e)

@@ -81,6 +81,14 @@
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exBodyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.configToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.followToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.petAnimToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -131,7 +139,6 @@
             this.exportAnimatorwithselectedAnimationClipMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToSceneHierarchyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showOriginalFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -162,7 +169,8 @@
             this.exportToolStripMenuItem,
             this.filterTypeToolStripMenuItem,
             this.debugMenuItem,
-            this.seerToolStripMenuItem});
+            this.seerToolStripMenuItem,
+            this.updateToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1264, 25);
@@ -553,23 +561,85 @@
             // configToolStripMenuItem
             // 
             this.configToolStripMenuItem.Name = "configToolStripMenuItem";
-            this.configToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.configToolStripMenuItem.Text = "Config";
             this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
             // exHeadToolStripMenuItem
             // 
             this.exHeadToolStripMenuItem.Name = "exHeadToolStripMenuItem";
-            this.exHeadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exHeadToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.exHeadToolStripMenuItem.Text = "ExHead";
             this.exHeadToolStripMenuItem.Click += new System.EventHandler(this.exHeadToolStripMenuItem_Click);
             // 
             // exBodyToolStripMenuItem
             // 
             this.exBodyToolStripMenuItem.Name = "exBodyToolStripMenuItem";
-            this.exBodyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exBodyToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.exBodyToolStripMenuItem.Text = "ExBody";
             this.exBodyToolStripMenuItem.Click += new System.EventHandler(this.exBodyToolStripMenuItem_Click);
+            // 
+            // exConfigToolStripMenuItem
+            // 
+            this.exConfigToolStripMenuItem.Name = "exConfigToolStripMenuItem";
+            this.exConfigToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.exConfigToolStripMenuItem.Text = "ExConfig";
+            this.exConfigToolStripMenuItem.Click += new System.EventHandler(this.exConfigToolStripMenuItem_Click);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allToolStripMenuItem1,
+            this.configToolStripMenuItem1,
+            this.defaultToolStripMenuItem,
+            this.followToolStripMenuItem,
+            this.petAnimToolStripMenuItem,
+            this.startupToolStripMenuItem});
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(63, 21);
+            this.updateToolStripMenuItem.Text = "Update";
+            // 
+            // allToolStripMenuItem1
+            // 
+            this.allToolStripMenuItem1.Name = "allToolStripMenuItem1";
+            this.allToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.allToolStripMenuItem1.Text = "All";
+            this.allToolStripMenuItem1.Click += new System.EventHandler(this.allToolStripMenuItem1_Click);
+            // 
+            // configToolStripMenuItem1
+            // 
+            this.configToolStripMenuItem1.Name = "configToolStripMenuItem1";
+            this.configToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.configToolStripMenuItem1.Text = "Config";
+            this.configToolStripMenuItem1.Click += new System.EventHandler(this.configToolStripMenuItem1_Click);
+            // 
+            // defaultToolStripMenuItem
+            // 
+            this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
+            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.defaultToolStripMenuItem.Text = "Default (7GB)";
+            this.defaultToolStripMenuItem.Click += new System.EventHandler(this.defaultToolStripMenuItem_Click);
+            // 
+            // followToolStripMenuItem
+            // 
+            this.followToolStripMenuItem.Name = "followToolStripMenuItem";
+            this.followToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.followToolStripMenuItem.Text = "Follow";
+            this.followToolStripMenuItem.Click += new System.EventHandler(this.followToolStripMenuItem_Click);
+            // 
+            // petAnimToolStripMenuItem
+            // 
+            this.petAnimToolStripMenuItem.Name = "petAnimToolStripMenuItem";
+            this.petAnimToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.petAnimToolStripMenuItem.Text = "PetAnim (3GB)";
+            this.petAnimToolStripMenuItem.Click += new System.EventHandler(this.petAnimToolStripMenuItem_Click);
+            // 
+            // startupToolStripMenuItem
+            // 
+            this.startupToolStripMenuItem.Name = "startupToolStripMenuItem";
+            this.startupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startupToolStripMenuItem.Text = "Startup";
+            this.startupToolStripMenuItem.Click += new System.EventHandler(this.startupToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -1110,13 +1180,6 @@
             this.showOriginalFileToolStripMenuItem.Visible = false;
             this.showOriginalFileToolStripMenuItem.Click += new System.EventHandler(this.showOriginalFileToolStripMenuItem_Click);
             // 
-            // exConfigToolStripMenuItem
-            // 
-            this.exConfigToolStripMenuItem.Name = "exConfigToolStripMenuItem";
-            this.exConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exConfigToolStripMenuItem.Text = "ExConfig";
-            this.exConfigToolStripMenuItem.Click += new System.EventHandler(this.exConfigToolStripMenuItem_Click);
-            // 
             // AssetStudioGUIForm
             // 
             this.AllowDrop = true;
@@ -1269,6 +1332,13 @@
         private System.Windows.Forms.ToolStripMenuItem exHeadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exBodyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exConfigToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem defaultToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem followToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem petAnimToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startupToolStripMenuItem;
     }
 }
 
