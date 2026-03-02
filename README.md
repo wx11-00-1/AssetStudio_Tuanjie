@@ -7,7 +7,7 @@
 ## 导出资源
 
 1. 下载安装 .NET Framework 运行时
-2. 打开 AssetStudioGUI.exe，在左上角菜单栏选择 File -> Load folder，加载游戏本体（不是启动器）所在的文件夹 ```Seer_Data\yoo```
+2. 打开 AssetStudioGUI.exe，在左上角菜单栏选择 File -> Load folder，加载游戏本体（不是启动器）所在的文件夹 ```Seer_Data\yoo```（加载过程中似乎会把文件夹整个放入内存，请确保电脑的剩余内存大于要加载的文件夹大小）
 3. 菜单栏 Seer -> Config，设置要保存到的文件夹
 4. 菜单栏 Seer -> ExHead、ExBody 或 ExConfig，导出所有头像、皮肤（只导出新增的图片） 或 文本资料（导出全部，覆盖原有文件。先删除游戏目录下的 ```Seer_Data\yoo\ConfigPackage``` 文件夹再打开游戏自动更新，不然导出的文本资料可能会不完整）
 
@@ -16,6 +16,7 @@
 1. 无需游戏本体，下载最新版本的资源文件（目前是删除所有旧资源后重新下载，所有资源占用磁盘空间 10GB 以上，不建议更新全部；适合单独更新 ConfigPackage）
 2. 菜单栏 Seer -> Update，可以选择更新 全部 或 单独 的游戏资源分类（ConfigPackage：文本类资源，精灵ID、皮肤、技能等；DefaultPackage：图片、少量 config.json；PetAnimPackage：动画），完成后会自动打开资源所在文件夹
 3. 下载的资源可以加载并导出，操作方式与导出游戏本体资源一样
+3. 进阶用法：更新开始时会获取所有文件列表，并以 json 格式保存到 seer_download 文件夹，如果仅需要导出一小部分资源，可以参考 json 文件精确找到所需资源对应的文件，无需加载整个文件夹
 
 # 导出其他
 
