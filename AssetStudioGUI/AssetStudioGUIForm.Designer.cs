@@ -139,6 +139,7 @@
             this.exportAnimatorwithselectedAnimationClipMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToSceneHierarchyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showOriginalFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manifestOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -590,6 +591,7 @@
             // 
             this.updateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allToolStripMenuItem1,
+            this.manifestOnlyToolStripMenuItem,
             this.configToolStripMenuItem1,
             this.defaultToolStripMenuItem,
             this.followToolStripMenuItem,
@@ -1180,6 +1182,13 @@
             this.showOriginalFileToolStripMenuItem.Visible = false;
             this.showOriginalFileToolStripMenuItem.Click += new System.EventHandler(this.showOriginalFileToolStripMenuItem_Click);
             // 
+            // manifestOnlyToolStripMenuItem
+            // 
+            this.manifestOnlyToolStripMenuItem.Name = "manifestOnlyToolStripMenuItem";
+            this.manifestOnlyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manifestOnlyToolStripMenuItem.Text = "Manifest Only";
+            this.manifestOnlyToolStripMenuItem.Click += new System.EventHandler(this.manifestOnlyToolStripMenuItem_Click);
+            // 
             // AssetStudioGUIForm
             // 
             this.AllowDrop = true;
@@ -1339,6 +1348,7 @@
         private System.Windows.Forms.ToolStripMenuItem followToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem petAnimToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manifestOnlyToolStripMenuItem;
     }
 }
 

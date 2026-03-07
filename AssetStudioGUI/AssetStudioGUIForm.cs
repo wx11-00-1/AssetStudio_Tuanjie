@@ -2207,7 +2207,7 @@ namespace AssetStudioGUI
             "StartupPackage",
         };
 
-        private async Task SeerUpdatePackage(string packageName, bool openFolderAfterFinished)
+        private async Task SeerUpdatePackage(string packageName, bool openFolderAfterFinished, bool manifestOnly = false)
         {
             StatusStripUpdate($"{packageName} 开始更新");
             string packageDownloadPath = Path.Combine(SEER_DOWNLOAD_FOLDER, packageName);
@@ -2238,13 +2238,16 @@ namespace AssetStudioGUI
                 });
                 System.IO.File.WriteAllText(Path.Combine(SEER_DOWNLOAD_FOLDER, $"{packageName}Manifest.json"), JObject.FromObject(dmOpeation).ToString());
 
-                // 4.1 下载 Assets
-                foreach (var bundle in dmOpeation.Manifest.BundleList)
+                if (!manifestOnly)
                 {
-                    FileUtility.WriteAllBytes(
-                        Path.Combine(packageDownloadPath, bundle.BundleName),
-                        await webClient.DownloadDataTaskAsync($"{BASE_URL}/{packageName}/{bundle.FileName}")
-                        );
+                    // 4.1 下载 Assets
+                    foreach (var bundle in dmOpeation.Manifest.BundleList)
+                    {
+                        FileUtility.WriteAllBytes(
+                            Path.Combine(packageDownloadPath, bundle.BundleName),
+                            await webClient.DownloadDataTaskAsync($"{BASE_URL}/{packageName}/{bundle.FileName}")
+                            );
+                    }
                 }
             }
             StatusStripUpdate($"{packageName} 更新完成");
@@ -2286,6 +2289,15 @@ namespace AssetStudioGUI
         private async void startupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await SeerUpdatePackage(SEER_PACKAGE_NAMES[4], true);
+        }
+
+        private async void manifestOnlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var packageName in SEER_PACKAGE_NAMES)
+            {
+                await SeerUpdatePackage(packageName, false, true);
+            }
+            System.Diagnostics.Process.Start(SEER_DOWNLOAD_FOLDER);
         }
 
         private void glControl1_MouseWheel(object sender, MouseEventArgs e)
