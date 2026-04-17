@@ -2216,10 +2216,10 @@ namespace AssetStudioGUI
             // 1. 获取版本号
             using (var webClient = new WebClient())
             {
-                // 抄 SeerApi 项目的请求头
+                // 抄 SeerApi 项目的请求头（用 Fiddler 也可以抓到）
                 webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36");
                 webClient.Headers.Add("referer", "https://newseer.61.com");
-                packageVersion = await webClient.DownloadStringTaskAsync($"{BASE_URL}/{packageName}/{YooAssetSettingsData.GetPackageVersionFileName(packageName)}");
+                packageVersion = await webClient.DownloadStringTaskAsync($"{BASE_URL}/{packageName}/{YooAssetSettingsData.GetPackageVersionFileName(packageName)}?{DateTime.UtcNow.Ticks}");
 
                 // 2. 获取原始清单文件
                 var manifestBytes = await webClient.DownloadDataTaskAsync($"{BASE_URL}/{packageName}/{YooAssetSettingsData.GetManifestBinaryFileName(packageName, packageVersion)}");
