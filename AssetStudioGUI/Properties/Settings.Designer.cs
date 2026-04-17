@@ -379,5 +379,20 @@ namespace AssetStudioGUI.Properties {
                 this["seerFolderConfig"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("[\r\n    {\r\n        \"name\": \"ConfigPackage\",\r\n        \"list\": [\r\n            \".*\"\r\n        ]\r\n    },\r\n    {\r\n        \"name\": \"DefaultPackage\",\r\n        \"list\": []\r\n    },\r\n    {\r\n        \"name\": \"FollowPackage\",\r\n        \"list\": []\r\n    },\r\n    {\r\n        \"name\": \"PetAnimPackage\",\r\n        \"list\": []\r\n    },\r\n    {\r\n        \"name\": \"StartupPackage\",\r\n        \"list\": []\r\n    }\r\n]")]
+        public string updateCustomList
+        {
+            get
+            {
+                return ((string)(this["updateCustomList"]));
+            }
+            set
+            {
+                this["updateCustomList"] = value;
+            }
+        }
     }
 }

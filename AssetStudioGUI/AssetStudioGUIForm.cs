@@ -24,6 +24,8 @@ using AssetStudioGUI.Seer.YooAsset;
 using System.Net.Http;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
+
 
 
 
@@ -2198,16 +2200,8 @@ namespace AssetStudioGUI
         }
 
         const string SEER_DOWNLOAD_FOLDER = "seer_download";
-        private string[] SEER_PACKAGE_NAMES = new string[]
-        {
-            "ConfigPackage",
-            "DefaultPackage",
-            "FollowPackage",
-            "PetAnimPackage",
-            "StartupPackage",
-        };
 
-        private async Task SeerUpdatePackage(string packageName, bool openFolderAfterFinished, bool manifestOnly = false)
+        private async Task SeerUpdatePackage(string packageName, List<string> strList)
         {
             StatusStripUpdate($"{packageName} 开始更新");
             string packageDownloadPath = Path.Combine(SEER_DOWNLOAD_FOLDER, packageName);
@@ -2238,66 +2232,47 @@ namespace AssetStudioGUI
                 });
                 System.IO.File.WriteAllText(Path.Combine(SEER_DOWNLOAD_FOLDER, $"{packageName}Manifest.json"), JObject.FromObject(dmOpeation).ToString());
 
-                if (!manifestOnly)
+                // 4.1 下载 Assets
+                var regList = strList.Select(str => new Regex(str));
+                foreach (var bundle in dmOpeation.Manifest.BundleList)
                 {
-                    // 4.1 下载 Assets
-                    foreach (var bundle in dmOpeation.Manifest.BundleList)
+                    foreach (var reg in regList)
                     {
-                        FileUtility.WriteAllBytes(
-                            Path.Combine(packageDownloadPath, bundle.BundleName),
-                            await webClient.DownloadDataTaskAsync($"{BASE_URL}/{packageName}/{bundle.FileName}")
-                            );
+                        if (reg.IsMatch(bundle.BundleName))
+                        {
+                            FileUtility.WriteAllBytes(
+                                Path.Combine(packageDownloadPath, bundle.BundleName),
+                                await webClient.DownloadDataTaskAsync($"{BASE_URL}/{packageName}/{bundle.FileName}")
+                                );
+                            break;
+                        }
                     }
                 }
             }
             StatusStripUpdate($"{packageName} 更新完成");
-            if (openFolderAfterFinished)
+        }
+
+        private class UpdateCustomListNode
+        {
+            public string name { get; set; }
+            public List<string> list { get; set; }
+        }
+
+        private async void updateGameDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
             {
-                System.Diagnostics.Process.Start(packageDownloadPath);
+                var configObj = JsonConvert.DeserializeObject<List<UpdateCustomListNode>>(Properties.Settings.Default.updateCustomList);
+                foreach (var obj in configObj)
+                {
+                    await SeerUpdatePackage(obj.name, obj.list);
+                }
+                Process.Start(SEER_DOWNLOAD_FOLDER);
             }
-        }
-
-        private async void allToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            foreach (var packageName in SEER_PACKAGE_NAMES)
+            catch (Exception ex)
             {
-                await SeerUpdatePackage(packageName, false);
+                StatusStripUpdate("下载失败");
             }
-            System.Diagnostics.Process.Start(SEER_DOWNLOAD_FOLDER);
-        }
-
-        private async void configToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            await SeerUpdatePackage(SEER_PACKAGE_NAMES[0], true);
-        }
-
-        private async void defaultToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            await SeerUpdatePackage(SEER_PACKAGE_NAMES[1], true);
-        }
-
-        private async void followToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            await SeerUpdatePackage(SEER_PACKAGE_NAMES[2], true);
-        }
-
-        private async void petAnimToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            await SeerUpdatePackage(SEER_PACKAGE_NAMES[3], true);
-        }
-
-        private async void startupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            await SeerUpdatePackage(SEER_PACKAGE_NAMES[4], true);
-        }
-
-        private async void manifestOnlyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (var packageName in SEER_PACKAGE_NAMES)
-            {
-                await SeerUpdatePackage(packageName, false, true);
-            }
-            System.Diagnostics.Process.Start(SEER_DOWNLOAD_FOLDER);
         }
 
         private void glControl1_MouseWheel(object sender, MouseEventArgs e)

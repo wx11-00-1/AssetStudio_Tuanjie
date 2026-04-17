@@ -44,6 +44,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.filterConfig = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.rtbUpdateList = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // filterHead
@@ -134,7 +136,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(275, 364);
+            this.buttonOk.Location = new System.Drawing.Point(275, 510);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 11;
@@ -185,11 +187,30 @@
             this.filterConfig.Size = new System.Drawing.Size(174, 21);
             this.filterConfig.TabIndex = 12;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(37, 385);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 12);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Update list";
+            // 
+            // rtbUpdateList
+            // 
+            this.rtbUpdateList.Location = new System.Drawing.Point(39, 400);
+            this.rtbUpdateList.Name = "rtbUpdateList";
+            this.rtbUpdateList.Size = new System.Drawing.Size(310, 87);
+            this.rtbUpdateList.TabIndex = 18;
+            this.rtbUpdateList.Text = "";
+            // 
             // FormSeerConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 429);
+            this.ClientSize = new System.Drawing.Size(427, 565);
+            this.Controls.Add(this.rtbUpdateList);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.folderConfig);
             this.Controls.Add(this.label8);
@@ -233,5 +254,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox filterConfig;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.RichTextBox rtbUpdateList;
     }
 }

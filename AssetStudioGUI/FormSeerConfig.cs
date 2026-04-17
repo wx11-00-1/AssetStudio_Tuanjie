@@ -18,6 +18,8 @@ namespace AssetStudioGUI
             folderBody.Text = Properties.Settings.Default.seerFolderBody;
             filterConfig.Text = Properties.Settings.Default.seerFilterConfig;
             folderConfig.Text = Properties.Settings.Default.seerFolderConfig;
+
+            rtbUpdateList.Text = Properties.Settings.Default.updateCustomList;
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
@@ -28,6 +30,8 @@ namespace AssetStudioGUI
             Properties.Settings.Default.seerFolderBody = folderBody.Text;
             Properties.Settings.Default.seerFilterConfig = filterConfig.Text;
             Properties.Settings.Default.seerFolderConfig = folderConfig.Text;
+
+            Properties.Settings.Default.updateCustomList = rtbUpdateList.Text;
 
             Properties.Settings.Default.Save();
         }
